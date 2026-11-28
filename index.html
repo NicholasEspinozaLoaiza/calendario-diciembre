@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Diciembre para ti 💗</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Great+Vibes&display=swap" rel="stylesheet">
+<style>
+:root{
+  --rosa:#f8d7e0; --rosa-claro:#fdeef2; --empolvado:#d9a3b2; --empolvado-os:#b87a8d;
+  --crema:#fff8f0; --beige:#ebd9c4; --dorado:#c9a24d; --dorado-claro:#e9d29a;
+  --rojo:#d96b7e; --verde:#8fb09a; --texto:#6b3d4c;
+  --serif:'Cormorant Garamond',Georgia,'Times New Roman',serif;
+  --script:'Great Vibes','Brush Script MT',cursive;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  min-height:100vh; font-family:var(--serif); color:var(--texto); font-size:20px;
+  background:radial-gradient(circle at 12% 8%,var(--rosa-claro),transparent 45%),
+             radial-gradient(circle at 90% 92%,var(--beige),transparent 45%),
+             linear-gradient(160deg,var(--crema),var(--rosa) 130%);
+  background-attachment:fixed; overflow-x:hidden;
+}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--dorado);outline-offset:3px}
+.hidden{display:none!important}
+
+/* partículas */
+.parts{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+.parts span,.card-parts span{position:absolute;top:-8%;opacity:.0;animation:caer linear infinite;will-change:transform}
+@keyframes caer{0%{transform:translate3d(0,-10vh,0) rotate(0);opacity:0}10%{opacity:.55}90%{opacity:.45}100%{transform:translate3d(30px,110vh,0) rotate(300deg);opacity:0}}
+
+/* acceso */
+#acceso{position:relative;z-index:1;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
+.caja{width:min(440px,100%);text-align:center;padding:40px 28px 34px;background:rgba(255,248,240,.82);
+  border:1px solid var(--dorado-claro);border-radius:28px;box-shadow:0 18px 50px rgba(184,122,141,.25);animation:entrar 1s ease both}
+@keyframes entrar{from{opacity:0;transform:translateY(14px) scale(.98)}to{opacity:1;transform:none}}
+.corona{font-size:2rem;letter-spacing:.4rem}
+.caja h1{font-family:var(--script);font-weight:400;font-size:3rem;line-height:1.1;color:var(--empolvado-os);margin:8px 0 6px}
+.caja p{line-height:1.4}
+.pista{margin:18px 0 14px;font-style:italic;color:var(--empolvado-os)}
+.caja input{width:100%;text-align:center;font:inherit;font-size:1.3rem;padding:12px 14px;border-radius:999px;
+  border:1.5px solid var(--empolvado);background:#fff;color:var(--texto);letter-spacing:.08em}
+.caja input::placeholder{color:#c9a9b3;letter-spacing:.05em}
+.btn{margin-top:14px;padding:12px 30px;border:none;border-radius:999px;font-size:1.15rem;font-weight:600;
+  color:#fff;background:linear-gradient(135deg,var(--empolvado),var(--rojo));box-shadow:0 8px 20px rgba(217,107,126,.35);transition:transform .25s,box-shadow .25s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 12px 24px rgba(217,107,126,.4)}
+#error{min-height:1.6em;margin-top:12px;color:var(--rojo);font-style:italic}
+.sacude{animation:sacude .45s}
+@keyframes sacude{20%,60%{transform:translateX(-8px)}40%,80%{transform:translateX(8px)}}
+
+/* calendario */
+#calendario{position:relative;z-index:1;max-width:980px;margin:0 auto;padding:36px 16px 60px}
+header{text-align:center;margin-bottom:26px}
+header h2{font-family:var(--script);font-weight:400;font-size:clamp(2.8rem,9vw,4.6rem);color:var(--empolvado-os);line-height:1.1}
+header p{font-style:italic;font-size:1.15rem}
+.leyenda{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;margin-top:12px;font-size:1rem}
+.leyenda i{display:inline-block;width:14px;height:14px;border-radius:50%;margin-right:6px;vertical-align:-2px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(112px,1fr));gap:14px}
+.dia{position:relative;aspect-ratio:1/1.08;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;
+  border-radius:22px;border:1.5px solid var(--empolvado);background:linear-gradient(160deg,#fff,var(--rosa-claro));
+  box-shadow:0 6px 16px rgba(184,122,141,.18);transition:transform .3s,box-shadow .3s}
+.dia:hover{transform:translateY(-4px) rotate(-1deg);box-shadow:0 12px 24px rgba(184,122,141,.3)}
+.dia .n{font-family:var(--script);font-size:2.6rem;line-height:1;color:var(--empolvado-os)}
+.dia .e{font-size:1.4rem}
+.dia .est{font-size:.8rem;font-style:italic;color:var(--empolvado-os)}
+.dia.abierto{background:linear-gradient(160deg,var(--crema),var(--beige));border-color:var(--dorado)}
+.dia.abierto::after{content:'✓';position:absolute;top:8px;right:12px;color:var(--dorado);font-weight:700}
+.dia.bloq{opacity:.55;filter:saturate(.4);cursor:not-allowed}
+.dia.bloq:hover{transform:none;box-shadow:0 6px 16px rgba(184,122,141,.18)}
+.dia.hoy{box-shadow:0 0 0 3px var(--dorado-claro),0 10px 26px rgba(201,162,77,.45);animation:pulso 2.8s ease-in-out infinite}
+@keyframes pulso{50%{box-shadow:0 0 0 6px rgba(233,210,154,.55),0 10px 26px rgba(201,162,77,.5)}}
+.dia.t8{border-color:var(--rojo);background:linear-gradient(160deg,#fff,#fbd3da)}
+.dia.t8 .n{color:var(--rojo)}
+.dia.tx{border-color:var(--verde);background:linear-gradient(160deg,#fff,#f6e3e8)}
+.dia.ty{border-color:var(--dorado);background:linear-gradient(160deg,#fffaf0,#f3e3b8)}
+.dia.ty .n{color:#a57d22}
+
+/* tarjeta */
+#modal{position:fixed;inset:0;z-index:10;display:flex;align-items:center;justify-content:center;padding:18px;
+  background:rgba(107,61,76,.45);backdrop-filter:blur(4px);animation:fade .35s ease both}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+.card{position:relative;width:min(560px,100%);max-height:92vh;overflow:auto;text-align:center;padding:46px 30px 30px;
+  border-radius:30px;border:2px solid var(--dorado-claro);background:linear-gradient(165deg,var(--crema),var(--rosa-claro));
+  box-shadow:0 24px 70px rgba(0,0,0,.28);animation:abrir .8s cubic-bezier(.2,.9,.3,1.2) both}
+@keyframes abrir{from{opacity:0;transform:perspective(900px) rotateX(-70deg) scale(.7)}to{opacity:1;transform:none}}
+.card-parts{position:absolute;inset:0;overflow:hidden;pointer-events:none;border-radius:inherit}
+.card>*:not(.card-parts){position:relative}
+.card .sello{font-size:3rem;animation:latir 2.4s ease-in-out infinite}
+@keyframes latir{50%{transform:scale(1.12)}}
+.card .num{font-family:var(--script);font-size:3.4rem;color:var(--empolvado-os);line-height:1.2}
+.card .linea{width:90px;height:2px;margin:6px auto 18px;background:linear-gradient(90deg,transparent,var(--dorado),transparent)}
+.card .frase{font-size:clamp(1.2rem,4.4vw,1.5rem);line-height:1.55;text-wrap:pretty;animation:aparece 1.2s .5s ease both}
+@keyframes aparece{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.nav{display:flex;justify-content:space-between;align-items:center;margin-top:24px}
+.nav button{border:1.5px solid var(--empolvado);background:#fff;border-radius:999px;padding:8px 18px;font-size:1rem;color:var(--empolvado-os)}
+.nav button:hover{background:var(--rosa)}
+.nav button:disabled{opacity:.35;cursor:default}
+.card.t8{background:linear-gradient(165deg,#fff4f5,#f9c9d3);border-color:var(--rojo)}
+.card.t8 .num{color:var(--rojo)}
+.card.tx{background:linear-gradient(165deg,#fffaf3,#f8d7e0);border-color:var(--verde)}
+.card.ty{background:linear-gradient(165deg,#fffaf0,#f6e6bb);border-color:var(--dorado)}
+.card.ty .num{color:#a57d22}
+
+@media (max-width:480px){body{font-size:18px}.grid{grid-template-columns:repeat(3,1fr);gap:10px}.dia .n{font-size:2.2rem}.card{padding:40px 20px 24px}}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;animation-iteration-count:1!important;transition:none!important}.parts,.card-parts{display:none}}
+</style>
+</head>
+<body>
+
+<div class="parts" id="parts" aria-hidden="true"></div>
+
+<!-- ACCESO -->
+<main id="acceso">
+  <div class="caja">
+    <div class="corona" aria-hidden="true">🌸 ♥ 🌸</div>
+    <h1>Para ti</h1>
+    <p>Hay una sorpresa esperándote cada día de diciembre.</p>
+    <p class="pista">Nuestro comienzo (día/mes/año)</p>
+    <input id="clave" type="text" inputmode="numeric" autocomplete="off" placeholder="dd/mm/aaaa" aria-label="Fecha de nuestro comienzo">
+    <button class="btn" id="entrar" type="button">Entrar</button>
+    <div id="error" role="alert"></div>
+  </div>
+</main>
+
+<!-- CALENDARIO -->
+<main id="calendario" class="hidden">
+  <header>
+    <h2>Diciembre para ti</h2>
+    <p>Una frase, un día, todo mi cariño.</p>
+    <div class="leyenda">
+      <span><i style="background:var(--rosa)"></i>Disponible</span>
+      <span><i style="background:var(--dorado)"></i>Abierto</span>
+      <span><i style="background:#cdbcc2"></i>Bloqueado</span>
+    </div>
+  </header>
+  <div class="grid" id="grid"></div>
+</main>
+
+<div id="modal" class="hidden" role="dialog" aria-modal="true" aria-label="Mensaje del día"></div>
+
+<script>
+/* =========================================================
+   CONFIGURACIÓN (edita aquí)
+   ========================================================= */
+const CONFIG = {
+  // Hash de la contraseña (no se guarda la fecha en texto claro).
+  hashClave: 8319102709513895,
+  // true = solo se abre el día de hoy y los anteriores (hora de America/Lima).
+  // false = todos los días abiertos (solo para pruebas).
+  restringirPorFecha: true,
+  // Para probar en tu computadora: pon una fecha, por ejemplo '2026-12-08'.
+  // Déjalo en null para usar la fecha real.
+  fechaPrueba: null
+};
+
+/* Una frase por día (índice 0 = día 1). Solo se cargan al desbloquear. */
+const FRASES = [
+"Mi felicidad empieza por ti. Todos los días, la razón de mi alegría son los momentos que pasamos juntos.",
+"Me caíste tan bien que nos hicimos amigos, conectamos tan bien que nos hicimos mejores amigos, me volviste tan loco que quise hacerte mi novia y te amo tanto que algún día te haré mi esposa.",
+"Tú haces que hasta la salida o el encuentro más simple parezca especial. Prefiero sentarme en tu casa mientras veo tus hermosas pestañas que viajar por el mundo con cualquiera; tú eres el único mundo que quiero recorrer y disfrutar.",
+"Un día estarás lejos y, cuando no estés a mi lado, siempre estarás en mi corazón. La distancia jamás me hará ver a otra mujer; cuando necesite afecto, cualquier contacto contigo, aunque sea virtual, será mejor que cualquier contacto con otra persona.",
+"Háblame siempre, cuéntame hasta la cosa más simple de tu día; cualquier excusa es buena para hablar. Necesito saber que sigues a mi lado; me alegra recordar que estoy con la mujer más hermosa del mundo.",
+"Además de ser hermosa, me enamoré de ti por tu inteligencia. Eres una mujer muy lista y responsable. Tú puedes con todo, vas a lograrlo todo, y yo estaré en mi primera fila sintiéndome el novio más orgulloso del mundo. Me haces el novio más feliz del mundo.",
+"Voy a esperarte todo lo que necesites para arreglarte. Eres muy buena maquillando; por algo tu mamá y tu hermana te piden ayuda. Aun así, amo más tu cara natural: eres tan hermosa que el maquillaje solo sirve para retocar una obra de arte.",
+"Todos los días agradezco al cielo un día más de vida y a ti te agradezco que hagas feliz cada día de mi vida. Feliz aniversario, 2 años y 10 meses haciendo mi vida más colorida y alegre.",
+"El estilo que tienes para vestir es increíble. Cada outfit tiene tu esencia y me encanta todo lo que sea tan tuyo. Con ese cuerpo es fácil lucir guapa y sexy. Eres la modelo que siempre voy a querer en mi pasarela.",
+"La fragilidad de tu piel me encanta; me recuerda lo delicada que es una princesa y lo mucho que se tiene que cuidar un tesoro. Seré tu caballero, te voy a proteger, consentir y amar.",
+"No hay lugar donde me sienta más seguro que en tus brazos. En tu pecho descansa mi alma; sé que estaremos bien mientras confiemos el uno en el otro.",
+"Tu opinión y tus sentimientos son lo más importante para mí. No quiero que te sientas incómoda o no respetada. Te daré la tranquilidad que mereces y haré que nunca dejes de sentirte amada y deseada.",
+"Las flores no son un simple obsequio, significan algo más. Sé que es algo muy especial para ti, y para mí también. Cuando veo un ramo siempre digo: “Ese ramo se vería bien en las manos de mi princesa”.",
+"Eres la única con la que me gusta hablar siempre, a la que le cuento todo. Me interesa tanto lo que pienses y siempre sabes dar un buen consejo, además de que confío en ti para contarte mis problemas y secretos.",
+"Cada regalo lo aprecio como algo invaluable. Gracias por haber convertido mi habitación en un museo de nuestro amor: cada rincón adornado con un regalo tuyo me hace recordar a la mujer cariñosa y amorosa con la que estoy.",
+"Sabes que siempre me has parecido hermosa, pero ese nuevo tinte de pelo te queda increíble. Resalta tu bella piel blanca y tus hermosas pestañas. Definitivamente tienes un estilo único y lo amo.",
+"Amo nuestros encuentros, ese momento en el que solo somos tú y yo, en el que conocemos partes de nosotros que nadie más puede ver o saber. Luego de ver facetas de ti que nadie más pudo ver, no me cabe duda de la maravillosa persona que eres y lo afortunado que soy.",
+"Rodearse de personas buenas ayuda a tu crecimiento personal, y tú eres la indicada para acompañarme toda la vida. Cada día me haces un mejor hombre.",
+"Me haces sentir la persona más afortunada del mundo. Gracias por siempre saber qué decir y por escucharme siempre. Cuando te necesite, sé que estarás ahí y me harás sentir mejor, porque me conoces más que nadie.",
+"Me gusta salir a comer contigo, pero nada se va a comparar jamás con tu sazón. Podríamos ir a cualquier restaurante en todo el mundo, pero estar juntos, tú tan hermosa y natural, y con una comida espectacular hecha por ti, no lo cambiaría por nada.",
+"Me hiciste una persona más sensible y vulnerable, y a la vez te volviste mi lugar donde pueda ser yo sin necesidad de aparentar ser más fuerte. Me diste todo lo que deseaba en esta vida.",
+"Si despertar con un “buenos días” tuyo en WhatsApp ya me alegra el día, no quiero imaginar lo feliz que seré cuando lo primero que vea al despertar sea esa hermosa cara mientras abrazo a mi princesa.",
+"Cuando pasemos las noches juntos, no sabré si un día amaneceré vivo o muerto, porque todos los días despertaría en el cielo viendo a un ángel frente a mí.",
+"Hoy es un día de familia; algún día estaremos tú, yo y una niña igual de hermosa que tú. Todavía no somos familia, pero me importas tanto como si lo fueras.",
+"Lo único que puedo pedir de regalo es que lo nuestro sea eterno. Solo quiero que en cada festividad y evento estés a mi lado. Haces que cualquier día sea especial para mí.",
+"Antes de conocernos no eras la mujer que imaginaba a mi lado; luego de conocerte descubrí que estaba buscando el camino equivocado. Eres la luz que pudo encaminarme: no eras lo que buscaba, pero definitivamente eres todo lo que necesito.",
+"Cuando nos vemos lo tengo todo, estoy en estado de euforia y felicidad absoluta, y me siento tan vacío cuando nos despedimos, pero la esperanza de saber que volveremos a vernos enciende mi corazón, contando los días hasta poder volver a verte.",
+"Seré pisado, pero siempre me importará más tu tranquilidad y tus sentimientos que cualquier otra cosa. Además, teniendo una novia como tú, siempre te preferiré a ti.",
+"Me encanta caminar de la mano contigo, saber que eres mi guía y que yo soy tu protector. Eres el tesoro más valioso que tengo entre mis brazos, y nuestra relación es la reliquia que voy a cuidar mientras la tenga y la que voy a recordar con cariño cuando ya no.",
+"Hace más de 2 años que te elegí como mi novia, y hasta hoy te he elegido cada día; te seguiré eligiendo hasta que mi corazón deje de latir por ti.",
+"Lo más feliz de terminar el año es recordar cada uno de nuestros momentos. Las memorias que creamos juntos son lo más hermoso que tengo."
+];
+
+/* Decoración por día: emoji propio y tema.
+   Temas: 'rom' (por defecto), 't8' (día 8), 'tx' (navidad), 'ty' (año nuevo) */
+const EMOJI = ["🌸","🌷","🎀","🦋","💗","✨","🌺","❤️","💐","🕊️","🍓","🌙","💌","🪻","⭐","🍒","🌼","💎","🎈","☁️","🧸","🫶","💖","🎄","🎁","🌟","🍰","🕯️","🪷","💍","🎆"];
+const TEMA = d => d===8 ? 't8' : (d===24||d===25) ? 'tx' : d===31 ? 'ty' : 'rom';
+const PARTICULAS = {
+  rom:['🌸','♥','✦','✿','🤍'],
+  t8:['❤️','🌹','🌸','🌺','♥'],
+  tx:['❄️','✨','🎁','🎄','❄️','⭐'],
+  ty:['✨','🎆','⭐','🎇','✦']
+};
+
+/* =========================================================
+   LÓGICA
+   ========================================================= */
+const $ = id => document.getElementById(id);
+const clave = $('clave'), error = $('error');
+let abiertos = new Set(), actual = 0;
+
+function hash(s, seed=0){ // cyrb53
+  let h1=0xdeadbeef^seed, h2=0x41c6ce57^seed;
+  for(let i=0,c;i<s.length;i++){c=s.charCodeAt(i);h1=Math.imul(h1^c,2654435761);h2=Math.imul(h2^c,1597334677);}
+  h1=Math.imul(h1^(h1>>>16),2246822507)^Math.imul(h2^(h2>>>13),3266489909);
+  h2=Math.imul(h2^(h2>>>16),2246822507)^Math.imul(h1^(h1>>>13),3266489909);
+  return 4294967296*(2097151&h2)+(h1>>>0);
+}
+function normalizar(txt){ // acepta 08/02/2024, 8-2-2024, 08022024…
+  const p = txt.trim().split(/[\/\-.\s]+/);
+  if(p.length===3) return p[0].padStart(2,'0')+p[1].padStart(2,'0')+p[2];
+  return txt.replace(/\D/g,'');
+}
+function intentar(){
+  if(hash(normalizar(clave.value))===CONFIG.hashClave){ error.textContent=''; desbloquear(); }
+  else{
+    error.textContent='Esa no es nuestra fecha, mi amor. Inténtalo otra vez 💗';
+    const c=document.querySelector('.caja'); c.classList.remove('sacude'); void c.offsetWidth; c.classList.add('sacude');
+  }
+}
+function hoyLima(){
+  if(CONFIG.fechaPrueba){const q=CONFIG.fechaPrueba.split('-').map(Number);return {y:q[0],m:q[1],d:q[2]};}
+  const p=new Intl.DateTimeFormat('en-CA',{timeZone:'America/Lima',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date());
+  const g=t=>+p.find(x=>x.type===t).value;
+  return {y:g('year'),m:g('month'),d:g('day')};
+}
+function disponible(d){ // hoy y días anteriores de diciembre 2026 (America/Lima)
+  if(!CONFIG.restringirPorFecha) return true;
+  const h=hoyLima();
+  if(h.y<2026 || (h.y===2026 && h.m<12)) return false;
+  if(h.y>2026) return true;
+  return d<=h.d;
+}
+function esHoy(d){ const h=hoyLima(); return h.y===2026 && h.m===12 && h.d===d; }
+
+function guardar(){ try{localStorage.setItem('cal-dic-2026',JSON.stringify([...abiertos]))}catch(e){} }
+function cargar(){ try{abiertos=new Set(JSON.parse(localStorage.getItem('cal-dic-2026')||'[]'))}catch(e){abiertos=new Set()} }
+
+function particulas(cont, set, n, grande){
+  cont.innerHTML='';
+  for(let i=0;i<n;i++){
+    const s=document.createElement('span');
+    s.textContent=set[i%set.length];
+    s.style.left=Math.random()*100+'%';
+    s.style.fontSize=(grande?14+Math.random()*16:12+Math.random()*14)+'px';
+    s.style.animationDuration=(9+Math.random()*10)+'s';
+    s.style.animationDelay=(-Math.random()*14)+'s';
+    cont.appendChild(s);
+  }
+}
+
+function dibujar(){
+  const g=$('grid'); g.innerHTML='';
+  FRASES.forEach((_,i)=>{
+    const d=i+1, t=TEMA(d);
+    const b=document.createElement('button');
+    b.type='button';
+    const ok=disponible(d), ab=ok&&abiertos.has(d);
+    b.className='dia'+(t==='t8'?' t8':t==='tx'?' tx':t==='ty'?' ty':'')+(ab?' abierto':'')+(!ok?' bloq':'')+(esHoy(d)?' hoy':'');
+    const est=!ok?'aún no':ab?'abierto':esHoy(d)?'hoy':'disponible';
+    b.setAttribute('aria-label','Día '+d+', '+est);
+    if(!ok) b.setAttribute('aria-disabled','true');
+    b.innerHTML='<span class="e" aria-hidden="true">'+(ok?EMOJI[i]:'🔒')+'</span><span class="n">'+d+'</span><span class="est">'+est+'</span>';
+    b.addEventListener('click',()=>{
+      if(!disponible(d)){ b.classList.remove('sacude'); void b.offsetWidth; b.classList.add('sacude'); return; }
+      abrir(d);
+    });
+    g.appendChild(b);
+  });
+}
+
+function abrir(d){
+  if(!disponible(d)) return;
+  actual=d; abiertos.add(d); guardar();
+  const t=TEMA(d), m=$('modal');
+  m.innerHTML=
+   '<div class="card '+t+'">'+
+     '<div class="card-parts" id="cp" aria-hidden="true"></div>'+
+     '<div class="sello" aria-hidden="true">'+EMOJI[d-1]+'</div>'+
+     '<div class="num">Día '+d+'</div><div class="linea"></div>'+
+     '<p class="frase"></p>'+
+     '<div class="nav"><button type="button" id="ant">‹ Anterior</button><button type="button" id="cer">Cerrar</button><button type="button" id="sig">Siguiente ›</button></div>'+
+   '</div>';
+  m.querySelector('.frase').textContent=FRASES[d-1];
+  $('ant').disabled=d===1; $('sig').disabled=d===31||!disponible(d+1);
+  $('ant').onclick=()=>abrir(d-1); $('sig').onclick=()=>abrir(d+1); $('cer').onclick=cerrar;
+  particulas($('cp'),PARTICULAS[t],t==='rom'?10:18,true);
+  m.classList.remove('hidden'); $('cer').focus();
+  dibujar();
+}
+function cerrar(){ $('modal').classList.add('hidden'); $('modal').innerHTML=''; }
+$('modal').addEventListener('click',e=>{ if(e.target.id==='modal') cerrar(); });
+document.addEventListener('keydown',e=>{
+  if($('modal').classList.contains('hidden')) return;
+  if(e.key==='Escape') cerrar();
+  if(e.key==='ArrowLeft' && actual>1) abrir(actual-1);
+  if(e.key==='ArrowRight' && actual<31 && disponible(actual+1)) abrir(actual+1);
+});
+
+function desbloquear(){
+  $('acceso').classList.add('hidden'); $('calendario').classList.remove('hidden');
+  cargar(); dibujar(); window.scrollTo(0,0);
+}
+
+$('entrar').addEventListener('click',intentar);
+clave.addEventListener('keydown',e=>{ if(e.key==='Enter') intentar(); });
+particulas($('parts'),PARTICULAS.rom,14,false);
+function refrescar(){ if(!$('calendario').classList.contains('hidden') && $('modal').classList.contains('hidden')) dibujar(); }
+setInterval(refrescar,60000);
+document.addEventListener('visibilitychange',()=>{ if(!document.hidden) refrescar(); });
+</script>
+</body>
+</html>
